@@ -1,2 +1,127 @@
 <h1>Showdata#index</h1>
 <p>Find me in app/views/showdata/index.html.erb</p>
+<script>
+
+$( document ).ready(function() {
+    console.log( "ready!" );
+localStorage.setItem("counter", 1);
+var myVar=setInterval(function () {getData()}, 500);
+
+//var i;
+  //   sleep(1000);
+     //url = "/display/"+i;
+     //$.get( url, function( data ) {
+     //console.log(data);
+     //delay(data);
+    //   sleep(1000);
+     //  append (data);
+       
+ // });
+//}
+
+});
+
+function getData(){
+ counter = localStorage.getItem("counter");
+ counter = parseInt(counter)
+ url = "/display/"+counter;
+     $.get( url, function( data ) {
+     //console.log(data);
+     //delay(data);
+    //   sleep(1000);
+      var tlen = $('#census tr').length;
+       if (tlen%20 == 0 ){
+		removeFirst();
+		append(data);
+	}
+      else{
+   	append(data);
+	}
+
+  });
+localStorage.setItem("counter",parseInt(counter+1))
+  
+}
+function removeFirst(){
+//$('#census tr:first').remove();
+$("table tr:nth-child(2)").remove();
+
+}
+      
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+
+function append(data)
+{
+   
+     jsondata = "<tr>";
+     jsondata += "<td>"+data["id"]+"</td>";
+     jsondata += "<td>"+data["label"]+"</td>";
+     jsondata += "<td>"+data["concept"]+"</td>";
+     jsondata += "</tr>" ;
+   $('#census').append(jsondata);
+}
+
+function remove(data)
+{ 
+          
+   }
+
+
+
+
+</script>
+
+<body>
+
+<table id="census">
+              <tr>
+               <th>Serial No</th>
+                  <th>Label</th>
+                   <th>Concept</th>                 
+             </tr>
+   
+     </table> 
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

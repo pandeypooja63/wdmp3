@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'showdata/index'
+  root 'showdata#index'
 
   #get 'display/dbdata'
 
