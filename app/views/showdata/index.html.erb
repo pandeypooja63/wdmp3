@@ -7,35 +7,28 @@ $( document ).ready(function() {
 localStorage.setItem("counter", 1);
 var myVar=setInterval(function () {getData()}, 500);
 
-//var i;
-  //   sleep(1000);
-     //url = "/display/"+i;
-     //$.get( url, function( data ) {
-     //console.log(data);
-     //delay(data);
-    //   sleep(1000);
-     //  append (data);
-       
- // });
-//}
-
 });
 
 function getData(){
+	if(localStorage.getItem("counter")== 201)
+	{
+		localStorage.setItem("counter",1);
+	}
  counter = localStorage.getItem("counter");
  counter = parseInt(counter)
  url = "/display/"+counter;
      $.get( url, function( data ) {
-     //console.log(data);
-     //delay(data);
-    //   sleep(1000);
       var tlen = $('#census tr').length;
-       if (tlen%20 == 0 ){
+       if (tlen>20 ){
 		removeFirst();
 		append(data);
+               $('#census tr:eq(even)').attr('style','color:#b8d1f3');
+               $('#census tr:eq(odd)').attr('style','color:#dae5f4');
 	}
       else{
    	append(data);
+ $('#census tr:eq(even)').attr('style','color:#b8d1f3');
+               $('#census tr:eq(odd)').attr('style','color:#dae5f4');
 	}
 
   });
@@ -43,10 +36,12 @@ localStorage.setItem("counter",parseInt(counter+1))
   
 }
 function removeFirst(){
-//$('#census tr:first').remove();
-$("table tr:nth-child(2)").remove();
-
+$("#census tr:eq(1)").fadeOut(500,function()
+	{	
+		$('#census tr:eq(1)').remove();
+	});
 }
+
       
 function sleep(milliseconds) {
   var start = new Date().getTime();
@@ -58,29 +53,35 @@ function sleep(milliseconds) {
 }
 
 function append(data)
-{
-   
+{ 
      jsondata = "<tr>";
      jsondata += "<td>"+data["id"]+"</td>";
      jsondata += "<td>"+data["label"]+"</td>";
      jsondata += "<td>"+data["concept"]+"</td>";
      jsondata += "</tr>" ;
    $('#census').append(jsondata);
+	$("#census tr:last").hide();
+	$("#census tr:last").fadeIn(500);
 }
 
-function remove(data)
-{ 
-          
-   }
-
-
-
-
 </script>
+<style>
+.h{     
+            color:#E66924; 
+            text-align:center;
+ 
+          }	
 
-<body>
 
-<table id="census">
+       body{
+		background-size: 1014px 788px;
+                #background-image: url("http://www.gruenetexas.com/images/home-background.png");
+		#background-repeat: repeat;
+		background-color: #EADAB9;
+	   }
+     </style>
+
+<table id="census" border="2">
               <tr>
                <th>Serial No</th>
                   <th>Label</th>
@@ -89,7 +90,6 @@ function remove(data)
    
      </table> 
 
-</body>
 
 
 
