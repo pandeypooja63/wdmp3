@@ -1,7 +1,5 @@
-<h1>Showdata#index</h1>
-<p>Find me in app/views/showdata/index.html.erb</p>
+<h1 align="center">CENSUS DATA</h1>
 <script>
-
 $( document ).ready(function() {
     console.log( "ready!" );
 localStorage.setItem("counter", 1);
@@ -22,13 +20,15 @@ function getData(){
        if (tlen>20 ){
 		removeFirst();
 		append(data);
-               $('#census tr:eq(even)').attr('style','color:#b8d1f3');
-               $('#census tr:eq(odd)').attr('style','color:#dae5f4');
+              // $('#census tr:eq(even)').attr('style','color:#b8d1f3');
+              // $('#census tr:eq(odd)').attr('style','color:#dae5f4');
+              $("table#census tr:even").css("background-color", "#F4F4F8");
+              $("table#census tr:odd").css("background-color", "#EFF1F1");
 	}
       else{
    	append(data);
- $('#census tr:eq(even)').attr('style','color:#b8d1f3');
-               $('#census tr:eq(odd)').attr('style','color:#dae5f4');
+              $("table#census tr:even").css("background-color", "#F4F4F8");
+              $("table#census tr:odd").css("background-color", "#EFF1F1");
 	}
 
   });
